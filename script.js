@@ -5,6 +5,19 @@ const makeupApp = {};
 //event handler
 const eventHandler = {};
 
+//call back functions
+const dataProcessor = {};
+
+dataProcessor.colorGenerator = function(array) {
+    let randomColor = [];
+    for (let i = 1; i <= 6; i++) {
+        let randomNum = Math.floor(Math.random() * array.length);
+
+        randomColor.push(array[randomNum]);
+    }
+    return randomColor;
+}
+
 // step2: submit the first form to take user's input
 
 eventHandler.submitProductFilter = () => {
@@ -21,9 +34,30 @@ eventHandler.submitProductFilter = () => {
             makeupApp.getColors(productTypes[i], $productPrice)
                 //resolve the promise, get all the hex colors
                 .then((colors) => {
-                    //? randomize the color
+                    console.log(productTypes[i])
+                        //randomize the color
+                    let colorPalette = dataProcessor.colorGenerator(colors);
+                    console.log(colorPalette);
+
+                    //clean the palette section inorder to print new result
+                    // eventHandler.initPalette();
+
                     //?print the color on page
-                    console.log(colors)
+
+                    colorPalette.map((color) => {
+                        //append radio button into palette
+                        let $colorRadio = `<input type="radio" id=${colorPalette.indexOf(color)} name="${productTypes[i]}-hex-color" value= ${color}>`;
+
+                        //append label into palette
+                        let $colorLabel = `<label for=${colorPalette.indexOf(color)} class='color-circle'></label>`;
+                        console.log(color);
+
+                        $(`.${productTypes[i]}-palette .palette-color`).append($colorRadio).append($colorLabel);
+
+                        $('.color-circle').css('width', '20px').css('height', '20px').css('display', 'block').css('background', color);
+                    })
+
+
                 });
         }
 
@@ -66,9 +100,14 @@ makeupApp.getColors = function(type, price) {
     });
 }
 
+// step5: clean the current palette to generate the new one
+eventHandler.initPalette = function() {
+    $('.palette-color').html('');
+}
+
 // step5: add eventlistener to 'give me another one' button
-eventHandler.newPaletteGenerator = () => {
-    $('button[name="palette"]').on('click'.function(event) {
+eventHandler.newPaletteGenerator = function() {
+    $('button[name="palette"]').on('click', function(event) {
         event.preventDefault();
     })
 }
