@@ -29,6 +29,9 @@ eventHandler.submitProductFilter = () => {
         //find the product price
         let $productPrice = $('input[name = product-price]:checked').val();
 
+        // clean the palette section inorder to print new result
+        eventHandler.initPalette();
+
         // step4: call API with each product type as query string
         for (let i = 0; i < productTypes.length; i++) {
             makeupApp.getColors(productTypes[i], $productPrice)
@@ -39,10 +42,7 @@ eventHandler.submitProductFilter = () => {
                     let colorPalette = dataProcessor.colorGenerator(colors);
                     console.log(colorPalette);
 
-                    //clean the palette section inorder to print new result
-                    // eventHandler.initPalette();
-
-                    //?print the color on page
+                    //print the color on page
 
                     colorPalette.map((color) => {
                         //append radio button into palette
@@ -102,7 +102,7 @@ makeupApp.getColors = function(type, price) {
 
 // step5: clean the current palette to generate the new one
 eventHandler.initPalette = function() {
-    $('.palette-color').html('');
+    $('.palette-color').empty();
 }
 
 // step5: add eventlistener to 'give me another one' button
