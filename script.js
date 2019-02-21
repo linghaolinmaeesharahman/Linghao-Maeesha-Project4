@@ -18,9 +18,17 @@ dataProcessor.colorGenerator = function(array) {
     return randomColor;
 }
 
+//store color in local
+let colorHolder = {
+    blush: [],
+    eyeshadow: [],
+    eyebrow: [],
+    lipstick: []
+};
+
 // step2: submit the first form to take user's input
 
-eventHandler.submitProductFilter = () => {
+eventHandler.submitProductFilter = function() {
     $('form').on('submit', function(event) {
         event.preventDefault();
         //find the product type
@@ -37,8 +45,8 @@ eventHandler.submitProductFilter = () => {
             makeupApp.getColors(productTypes[i], $productPrice)
                 //resolve the promise, get all the hex colors
                 .then((colors) => {
-                    console.log(productTypes[i])
-                        //randomize the color
+                    console.log(productTypes[i]);
+                    // randomize the color
                     let colorPalette = dataProcessor.colorGenerator(colors);
                     console.log(colorPalette);
 
@@ -57,11 +65,11 @@ eventHandler.submitProductFilter = () => {
                         $('.color-circle').css('width', '20px').css('height', '20px').css('display', 'block').css('background', color);
                     })
 
-
                 });
-        }
+            // eventHandler.printPalette(colors);
 
-    });
+        };
+    })
 }
 
 // step3: take user's input and pass into API to filter the data we want.
@@ -91,12 +99,14 @@ makeupApp.getColors = function(type, price) {
         }
         //take the hex color of related data out and store them into an array
     }).then(function(products) {
-        let allColors = [];
+        let colorHolderType = colorHolder[`${type}`];
+        colorHolderType.length = 0;
         for (let i in products) {
             let colorCollection = products[i].product_colors;
-            colorCollection.map((color) => allColors.push(color["hex_value"]));
+            colorCollection.map((color) => colorHolderType.push(color["hex_value"]));
         }
-        return allColors;
+        console.log(colorHolder);
+        return colorHolderType;
     });
 }
 
@@ -105,10 +115,45 @@ eventHandler.initPalette = function() {
     $('.palette-color').empty();
 }
 
-// step5: add eventlistener to 'give me another one' button
+// step6: print the color on page
+eventHandler.printPalette = function(colorArr) {
+    let colorPalette = dataProcessor.colorGenerator(colorArr);
+    colorPalette.map((color) => {
+        //append radio button into palette
+        let $colorRadio = `<input type="radio" id=${colorPalette.indexOf(color)} name="${productTypes[i]}-hex-color" value= ${color}>`;
+
+        //append label into palette
+        let $colorLabel = `<label for=${colorPalette.indexOf(color)} class='color-circle'></label>`;
+        console.log(color);
+
+        $(`.${productTypes[i]}-palette .palette-color`).append($colorRadio).append($colorLabel);
+
+        $('.color-circle').css('width', '20px').css('height', '20px').css('display', 'block').css('background', color);
+    })
+}
+
+// step7: add eventlistener to 'give me another one' button
 eventHandler.newPaletteGenerator = function() {
     $('button[name="palette"]').on('click', function(event) {
         event.preventDefault();
+        //find the value of clicked button
+        let $anotherButton = $(this).val();
+
+        //find the color related to this button
+        let colorPalette = dataProcessor.colorGenerator(colorHolder[$anotherButton]);
+        colorPalette.map((color) => {
+            //append radio button into palette
+            let $colorRadio = `<input type="radio" id=${colorPalette.indexOf(color)} name="${productTypes[i]}-hex-color" value= ${color}>`;
+
+            //append label into palette
+            let $colorLabel = `<label for=${colorPalette.indexOf(color)} class='color-circle'></label>`;
+            console.log(color);
+
+            $(`.${productTypes[i]}-palette .palette-color`).append($colorRadio).append($colorLabel);
+
+            $('.color-circle').css('width', '20px').css('height', '20px').css('display', 'block').css('background', color);
+        })
+
     })
 }
 
