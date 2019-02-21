@@ -1,17 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Makeup API</title>
 </head>
+
 <body>
-    <form action="">
-        
-    </form>
-    
-    <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='crossorigin='anonymous'></script>
+    <div class="body-wrapper">
+        <header>
+            <div class="wrapper">
+                <h1>Match your make-up colors</h1>
+            </div>
+        </header>
+
+        <main class="user-choice">
+            <form action="">
+                <fieldset class="product-type">
+                    <label for="blush">Blush</label>
+                    <input type="checkbox" id="blush" name="product-type" value="blush">
+
+                    <label for="eyebrow">Eyebrow</label>
+                    <input type="checkbox" id="eyebrow" name="product-type" value="eyebrow">
+
+                    <label for="eyeshadow">Eyeshadow</label>
+                    <input type="checkbox" id="eyeshadow" name="product-type" value="eyeshadow">
+
+                    <label for="lipstick">Lipstick</label>
+                    <input type="checkbox" id="lipstick" name="product-type" value="lipstick">
+                </fieldset>
+
+                <fieldset class="price-sign">
+                    <label for="cheap" aria-label="cheap">$</label>
+                    <input type="radio" id="cheap" name="product-price" value="$">
+
+                    <label for="expensive" aria-label="expensive">$$</label>
+                    <input type="radio" id="expensive" name="product-price" value="$$">
+                </fieldset>
+
+                <div class="button-container">
+                    <input type="submit" value="Give me palettes">
+                </div>
+            </form>
+        </main>
+
+        <main class="palette">
+            <div class="wrapper">
+                <section class="blush-palette">
+                    <div class="palette-color"></div>
+                    <div class="button-container">
+                        <input type="submit" value="Give me another one" name="blush-palette">
+                    </div>
+                </section>
+
+                <section class="eyebrow-palette">
+                    <div class="palette-color"></div>
+                    <div class="button-container">
+                        <input type="submit" value="Give me another one" name="eyebrow-palette">
+                    </div>
+                </section>
+
+                <section class="eyeshadow-palette">
+                    <div class="palette-color"></div>
+                    <div class="button-container">
+                        <input type="submit" value="Give me another one" name="eyeshadow-palette">
+                    </div>
+                </section>
+
+                <section class="lipstick-palette">
+                    <div class="palette-color"></div>
+                    <div class="button-container">
+                        <input type="submit" value="Give me another one" name="lipstick-palette">
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <main class="face">
+            <div class="wrapper">
+                <section class="eyebrow-left"></section>
+                <section class="eyebrow-right"></section>
+                <section class="eye-left"></section>
+                <section class="eye-right"></section>
+                <section class="cheek-left"></section>
+                <section class="cheek-right"></section>
+                <section class="nose"></section>
+                <section class="lip"></section>
+            </div>
+            <div class="button-container">
+                <input type="submit" value="Looks good, give me products!">
+            </div>
+        </main>
+
+        <main class="result">
+            <div class="wrapper">
+                <section class="blush-result">
+                    <h1>Blush!</h1>
+                    <h2 class="brand-name"></h2>
+                    <img src="" alt="this is your blush recommendation.">
+                </section>
+
+                <section class="eyebrow-result">
+                    <h1>Eyebrow!</h1>
+                    <h2 class="brand-name"></h2>
+                    <img src="" alt="this is your eyebrow recommendation.">
+                </section>
+
+                <section class="eyeshadow-result">
+                    <h1>Eyeshadow!</h1>
+                    <h2 class="brand-name"></h2>
+                    <img src="" alt="this is your eyeshadow recommendation.">
+                </section>
+
+                <section class="lipstick-result">
+                    <h1>Lipstick!</h1>
+                    <h2 class="brand-name"></h2>
+                    <img src="" alt="this is your lipstick recommendation.">
+                </section>
+            </div>
+        </main>
+
+    </div>
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous'></script>
     <script src="script.js"></script>
 </body>
+
 </html>
