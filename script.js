@@ -115,6 +115,26 @@ eventHandler.newPaletteGenerator = function() {
 // step:6 add eventlistener to palette radio, to collect user's input of color
 // print to SVG
 
+// let $colorRadio = `<input type="radio" id=${colorPalette.indexOf(color)} name="${productTypes[i]}-hex-color" value= ${color}>`;
+// take out radio name and value 
+// take out value of product type and color 
+// print onto face
+
+// $colorRadio.click(function() {
+
+// })
+
+eventHandler.inputColor = function () {
+    $("input[type='radio']").on('click', function () {
+        // let productType = "${productTypes[i]}"
+        // let productColor = "${color}"
+        // console.log(productType);
+    })
+}
+
+
+
+
 
 // step:7 add eventlistener to confirm button, to collect user's choice of color
 
