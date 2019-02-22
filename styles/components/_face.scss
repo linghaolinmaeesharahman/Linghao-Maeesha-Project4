@@ -7,20 +7,27 @@
         padding: 100px 0;
 
         .st2 {
-        fill: #f1a8a6;
+        fill: #fff;
+        stroke: #000000;
         }
         
-        #face {
+        #face .st0 {
             fill: white;
             stroke: #000000;
         }
         
         #lip {
-            fill: #e17a75;
+            fill: #fff;
+            stroke: #000000;
         }
         
         .st4 {
             fill: #2c3232;
+            stroke: #000000;
+        }
+
+        #nose {
+            stroke: #000000;
         }
         
         #eye-left,
@@ -31,7 +38,8 @@
         }
         
         .st3 {
-            fill: #debbb2;
+            fill: #fff;
+            stroke: #000000;
         }
     }  
 }

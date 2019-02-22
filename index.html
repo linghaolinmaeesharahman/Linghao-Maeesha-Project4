@@ -21,6 +21,7 @@
         <main class="user-choice">
             <div class="wrapper">
                 <form action="">
+                    <h2>Choose Products You Would Like to compare</h2>
                     <fieldset class="product-type">
                         <input type="checkbox" id="blush" name="product-type" value="blush">
                         <label for="blush">Blush</label>
@@ -34,7 +35,7 @@
                         <input type="checkbox" id="lipstick" name="product-type" value="lipstick">
                         <label for="lipstick">Lipstick</label>
                     </fieldset>
-
+                    <h2>Choose A Price Range</h2>
                     <fieldset class="price-sign">
                         <label for="cheap" aria-label="cheap">$</label>
                         <input type="radio" id="cheap" name="product-price" value="$">
@@ -44,7 +45,7 @@
                     </fieldset>
                     <div class="wrapper">
                         <div class="button-container">
-                            <input type="submit" value="Give me palettes">
+                            <input type="submit" value="Show me palettes!">
                         </div>
                     </div>
                 </div>
@@ -57,7 +58,7 @@
                     <h3>Blush Palette</h3>
                     <div class="palette-color"></div>
                     <div class="button-container">
-                        <button type="button" value="blush" name="palette">Give me another one</button>
+                        <button type="button" value="blush" name="palette">New Palette Please!</button>
                     </div>
                 </section>
 
@@ -65,7 +66,7 @@
                     <h3>Eyebrow Palette</h3>
                     <div class="palette-color"></div>
                     <div class="button-container">
-                        <button type="button" value="eyebrow" name="palette">Give me another one</button>
+                        <button type="button" value="eyebrow" name="palette">New palette please!</button>
                     </div>
                 </section>
 
@@ -73,7 +74,7 @@
                     <h3>Eyeshadow Palette</h3>
                     <div class="palette-color"></div>
                     <div class="button-container">
-                        <button type="button" value="eyeshadow" name="palette">Give me another one</button>
+                        <button type="button" value="eyeshadow" name="palette">New palette please!</button>
                     </div>
                 </section>
 
@@ -81,7 +82,7 @@
                     <h3>Lipstick Palette</h3>
                     <div class="palette-color"></div>
                     <div class="button-container">
-                        <button type="button" value="lipstick" name="palette">Give me another one</button>
+                        <button type="button" value="lipstick" name="palette">New palette please!</button>
                     </div>
                 </section>
             </div>
@@ -166,8 +167,13 @@
                     </g>
                 </svg>
                 <div class="wrapper">
+                    <div class="button-container reset-button">
+                        <button type="reset" value="reset" name="reset-button">Clear the colours!</button>
+                    </div>
+                </div>
+                <div class="wrapper">
                     <div class="button-container confirm-button">
-                        <button type="button" value="" name="confirm-button">Looks good, give me products!</button>
+                        <button type="button" value="" name="confirm-button">Looks good, show me the products!</button>
                     </div>
                 </div>
             </div>
@@ -177,26 +183,34 @@
             <div class="wrapper">
                 <section class="blush-result">
                     <h1>Blush!</h1>
-                    <h2 class="brand-name"></h2>
-                    <img src="" alt="this is your blush recommendation.">
+                    <h4 class="brand-name"></h4>
+                    <h4 class="product-name"></h4>
+                    <img src="https://fillmurray.com/200/300" alt="this is your blush recommendation.">
+                    <span class="currency"></span>
                 </section>
 
                 <section class="eyebrow-result">
                     <h1>Eyebrow!</h1>
-                    <h2 class="brand-name"></h2>
-                    <img src="" alt="this is your eyebrow recommendation.">
+                    <h4 class="brand-name"></h4>
+                    <h4 class="product-name"></h4>
+                    <img src="https://fillmurray.com/200/300" alt="this is your blush recommendation.">
+                    <span class="currency"></span>
                 </section>
 
                 <section class="eyeshadow-result">
                     <h1>Eyeshadow!</h1>
-                    <h2 class="brand-name"></h2>
-                    <img src="" alt="this is your eyeshadow recommendation.">
+                    <h4 class="brand-name"></h4>
+                    <h4 class="product-name"></h4>
+                    <img src="https://fillmurray.com/200/300" alt="this is your blush recommendation.">
+                    <span class="currency"></span>
                 </section>
 
                 <section class="lipstick-result">
                     <h1>Lipstick!</h1>
-                    <h2 class="brand-name"></h2>
-                    <img src="" alt="this is your lipstick recommendation.">
+                    <h4 class="brand-name"></h4>
+                    <h4 class="product-name"></h4>
+                    <img src="https://fillmurray.com/200/300" alt="this is your blush recommendation.">
+                    <span class="currency"></span>
                 </section>
             </div>
         </main>

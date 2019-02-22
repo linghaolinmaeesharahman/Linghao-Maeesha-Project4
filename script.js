@@ -128,6 +128,13 @@ eventHandler.submitProductFilter = function() {
                         //change the label to each hex color
                         $(`.${productTypes[i]}-palette label[for=${radioId}]`)
                             .css('background', color);
+                        
+                        // hide radio buttons
+                        $('input:radio').addClass('input-hidden');
+                        // add border on label when it is checked
+                        $('label').click(function () {
+                            $(this).addClass('selected').siblings().removeClass('selected');
+                        });  
                     })
                 });
         };
@@ -151,10 +158,11 @@ eventHandler.initPalette = function() {
 // print onto face
 
 getColor = function () {
-    $('.palette-color').on('click', 'input', function (event) {
-        event.preventDefault();
+    $('.palette-color').on('click', 'input', function () {
         console.log('click');
         //find the value of clicked radio hex code 
+
+        // $('.palette input[type="radio"]').css('display', 'none');
 
         let inputColor = $(this).val();
 
@@ -175,12 +183,21 @@ getColor = function () {
         }
 
         if (inputType === 'lipstick') {
-            $('#lip').css('fill', inputColor);
+            $('#lip .st0').css('fill', inputColor);
         }
 
         if (inputType === 'eyeshadow') {
             $('.st3').css('fill', inputColor);
         }
+
+        // // hide radio buttons
+        // $('input:radio').addClass('input-hidden');
+        // // add border on label when it is checked
+        // $('label').click(function () {
+        //     $(this).addClass('selected').siblings().removeClass('selected');
+        // }); 
+
+        // $('.palette input[type="radio"]').css('display', 'none');
     })
 }
 
@@ -213,9 +230,13 @@ eventHandler.newPaletteGenerator = function() {
             $(`.${$anotherButton}-palette .palette-color`)
                 .append($colorRadio)
                 .append($colorLabel);
+            
+            // $('.palette input[type="radio"]').css('display', 'none');
 
             //change the color of current label 
-            $(`.${$anotherButton}-palette label[for=${radioId}]`).css('background', color);
+            $(`.${$anotherButton}-palette label[for=${radioId}]`).css('background', color)
+
+
         })
 
     })
@@ -225,6 +246,21 @@ eventHandler.newPaletteGenerator = function() {
 
 
 // step:9 add eventlistener to confirm button, to collect user's choice of color
+
+// step :10 add eventlistener to reset button to clear the colours
+// callback function
+
+clearColor = function () {
+    $('button[type="reset"]').on('click', function(event) {
+        event.preventDefault();
+        console.log('reset');
+
+        $('path').css('fill', 'none');
+        $('.st2').css('fill', 'none');
+    })
+}
+
+clearColor();
 
 $(function() {
     eventHandler.submitProductFilter();
