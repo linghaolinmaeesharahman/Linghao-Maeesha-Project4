@@ -136,14 +136,14 @@ svg {
   width: 20%; }
 
 .st2 {
-  fill: pink; }
+  fill: #f1a8a6; }
 
 #face {
   fill: white;
   stroke: #000000; }
 
 #lip {
-  fill: red; }
+  fill: #e17a75; }
 
 #brow-left,
 #brow-right {
