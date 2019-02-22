@@ -208,6 +208,11 @@ input[type="submit"] {
   justify-content: space-around;
   text-align: center; }
 
+.palette .palette-color {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
 header {
   text-align: center;
   background-color: #f0e4e4; }

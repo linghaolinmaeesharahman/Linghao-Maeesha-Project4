@@ -158,6 +158,14 @@ getColor = function () {
 
         $('#lip').css('fill', $(this).val());
     })
+
+    // $('.palette-color').on('click', 'input', function (event) {
+    //     event.preventDefault();
+    //     console.log('click');
+    //     //find the value of clicked radio hex code 
+
+    //     $('#brow-left', '#brow-right').css('fill', $(this).val());
+    // })
 }
 
 getColor();
