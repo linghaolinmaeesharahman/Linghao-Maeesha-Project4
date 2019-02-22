@@ -156,16 +156,32 @@ getColor = function () {
         console.log('click');
         //find the value of clicked radio hex code 
 
-        $('#lip').css('fill', $(this).val());
+        let inputColor = $(this).val();
+
+        let inputType = $(this).attr("name");
+
+        let inputTypeBlush = $('input[name="blush"]:checked').val();
+        let inputTypeEyebrow = $('input[name="eyebrow"]:checked').val();
+        let inputTypeEyeshadow = $('input[name="eyeshadow"]:checked').val();
+        let inputTypeLipstick = $('input[name="lipstick"]:checked').val();
+        
+        
+        if (inputType === 'blush') {
+            $('.st2').css('fill', inputColor);
+        } 
+
+        if (inputType === 'eyebrow') {
+            $('.st4').css('fill', inputColor);
+        }
+
+        if (inputType === 'lipstick') {
+            $('#lip').css('fill', inputColor);
+        }
+
+        if (inputType === 'eyeshadow') {
+            $('.st3').css('fill', inputColor);
+        }
     })
-
-    // $('.palette-color').on('click', 'input', function (event) {
-    //     event.preventDefault();
-    //     console.log('click');
-    //     //find the value of clicked radio hex code 
-
-    //     $('#brow-left', '#brow-right').css('fill', $(this).val());
-    // })
 }
 
 getColor();
