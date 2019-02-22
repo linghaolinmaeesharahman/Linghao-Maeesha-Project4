@@ -83,6 +83,7 @@ makeupApp.getProductsByColor = function(type, price, color) {
         .then(products => {
             return products.filter(product => {
                 product.product_colors.includes(color);
+                console.log(product);
             });
         });
 }
@@ -128,13 +129,13 @@ eventHandler.submitProductFilter = function() {
                         //change the label to each hex color
                         $(`.${productTypes[i]}-palette label[for=${radioId}]`)
                             .css('background', color);
-                        
+
                         // hide radio buttons
                         $('input:radio').addClass('input-hidden');
                         // add border on label when it is checked
-                        $('label').click(function () {
+                        $('label').click(function() {
                             $(this).addClass('selected').siblings().removeClass('selected');
-                        });  
+                        });
                     })
                 });
         };
@@ -157,8 +158,8 @@ eventHandler.initPalette = function() {
 // take out value of product type and color 
 // print onto face
 
-getColor = function () {
-    $('.palette-color').on('click', 'input', function () {
+getColor = function() {
+    $('.palette-color').on('click', 'input', function() {
         console.log('click');
         //find the value of clicked radio hex code 
 
@@ -172,11 +173,11 @@ getColor = function () {
         let inputTypeEyebrow = $('input[name="eyebrow"]:checked').val();
         let inputTypeEyeshadow = $('input[name="eyeshadow"]:checked').val();
         let inputTypeLipstick = $('input[name="lipstick"]:checked').val();
-        
-        
+
+
         if (inputType === 'blush') {
             $('.st2').css('fill', inputColor);
-        } 
+        }
 
         if (inputType === 'eyebrow') {
             $('.st4').css('fill', inputColor);
@@ -230,7 +231,7 @@ eventHandler.newPaletteGenerator = function() {
             $(`.${$anotherButton}-palette .palette-color`)
                 .append($colorRadio)
                 .append($colorLabel);
-            
+
             // $('.palette input[type="radio"]').css('display', 'none');
 
             //change the color of current label 
@@ -243,26 +244,36 @@ eventHandler.newPaletteGenerator = function() {
 }
 
 // step:8 add eventlistener to confirm button, to collect user's choice of color
+eventHandler.confirmProduct = function() {
+        $('button[name = "confirm-button"]').on('click', function(event) {
+                    event.preventDefault();
 
+                    //take the user's choice of colors
+                    let $userBlush = $('.blush-palette input[type = "radio"]:checked').val();
+                    let $userEyebrow = $('.eyebrow-palette input[type = "radio"]:checked').val();
+                    let $userEyeshadow = $('.eyeshadow-palette input[type = "radio"]:checked').val();
+                    let $userLipstick = $('.lipstick-palette input[type = "radio"]:checked').val();
+                    console.log($userBlush, $userEyebrow, $userEyeshadow, $userLipstick);
 
-// step:9 add eventlistener to confirm button, to collect user's choice of color
+                    // step:9 add eventlistener to confirm button, to collect user's choice of color
 
-// step :10 add eventlistener to reset button to clear the colours
-// callback function
+                    // step :10 add eventlistener to reset button to clear the colours
+                    // callback function
 
-clearColor = function () {
-    $('button[type="reset"]').on('click', function(event) {
-        event.preventDefault();
-        console.log('reset');
+                    clearColor = function() {
+                        $('button[type="reset"]').on('click', function(event) {
+                            event.preventDefault();
+                            console.log('reset');
 
-        $('path').css('fill', 'none');
-        $('.st2').css('fill', 'none');
-    })
-}
+                            $('path').css('fill', 'none');
+                            $('.st2').css('fill', 'none');
+                        })
+                    }
 
-clearColor();
+                    clearColor();
 
-$(function() {
-    eventHandler.submitProductFilter();
-    eventHandler.newPaletteGenerator();
-});
+                    $(function() {
+                        eventHandler.submitProductFilter();
+                        eventHandler.newPaletteGenerator();
+                        eventHandler.confirmProduct();
+                    });
