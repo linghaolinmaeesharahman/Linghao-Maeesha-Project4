@@ -48,26 +48,27 @@ eventHandler.submitProductFilter = function() {
                     console.log(productTypes[i]);
                     // randomize the color
                     let colorPalette = dataProcessor.colorGenerator(colors);
-                    console.log(colorPalette);
 
                     //print the color on page
 
                     colorPalette.map((color) => {
+                        //give each radio an id, so they can attach to each label
+                        let radioId = "radio-" + productTypes[i] + colorPalette.indexOf(color);
                         //append radio button into palette
-                        let $colorRadio = `<input type="radio" id=${colorPalette.indexOf(color)} name="${productTypes[i]}-hex-color" value= ${color}>`;
+                        let $colorRadio = `<input type="radio" id=${radioId} name="${productTypes[i]}-hex-color" value= ${color}>`;
 
                         //append label into palette
-                        let $colorLabel = `<label for=${colorPalette.indexOf(color)} class='color-circle'></label>`;
-                        console.log(color);
+                        let $colorLabel = `<label for=${radioId} class='color-circle'></label>`;
 
-                        $(`.${productTypes[i]}-palette .palette-color`).append($colorRadio).append($colorLabel);
+                        $(`.${productTypes[i]}-palette .palette-color`)
+                            .append($colorRadio)
+                            .append($colorLabel);
 
-                        $('.color-circle').css('width', '20px').css('height', '20px').css('display', 'block').css('background', color);
+                        //change the label to each hex color
+                        $(`.${productTypes[i]}-palette label[for=${radioId}]`)
+                            .css('background', color);
                     })
-
                 });
-            // eventHandler.printPalette(colors);
-
         };
     })
 }
@@ -115,22 +116,9 @@ eventHandler.initPalette = function() {
     $('.palette-color').empty();
 }
 
-// step6: print the color on page
-eventHandler.printPalette = function(colorArr) {
-    let colorPalette = dataProcessor.colorGenerator(colorArr);
-    colorPalette.map((color) => {
-        //append radio button into palette
-        let $colorRadio = `<input type="radio" id=${colorPalette.indexOf(color)} name="${productTypes[i]}-hex-color" value= ${color}>`;
+// step:6 add eventlistener to palette radio, to collect user's input of color
+// print to SVG
 
-        //append label into palette
-        let $colorLabel = `<label for=${colorPalette.indexOf(color)} class='color-circle'></label>`;
-        console.log(color);
-
-        $(`.${productTypes[i]}-palette .palette-color`).append($colorRadio).append($colorLabel);
-
-        $('.color-circle').css('width', '20px').css('height', '20px').css('display', 'block').css('background', color);
-    })
-}
 
 // step7: add eventlistener to 'give me another one' button
 eventHandler.newPaletteGenerator = function() {
@@ -139,32 +127,40 @@ eventHandler.newPaletteGenerator = function() {
         //find the value of clicked button
         let $anotherButton = $(this).val();
 
+        //clean the color-palette from last input
+        $(`.${$anotherButton}-palette .palette-color`).empty();
+
         //find the color related to this button
         let colorPalette = dataProcessor.colorGenerator(colorHolder[$anotherButton]);
+
         colorPalette.map((color) => {
+            //give each radio an id, so they can attach to each label
+            let radioId = "radio-" + $anotherButton + colorPalette.indexOf(color);
+
             //append radio button into palette
-            let $colorRadio = `<input type="radio" id=${colorPalette.indexOf(color)} name="${productTypes[i]}-hex-color" value= ${color}>`;
+            let $colorRadio = `<input type="radio" name=${$anotherButton}-palette id=${radioId} value= ${color}>`;
 
             //append label into palette
-            let $colorLabel = `<label for=${colorPalette.indexOf(color)} class='color-circle'></label>`;
+            let $colorLabel = `<label for=${radioId} class='color-circle'></label>`;
             console.log(color);
 
-            $(`.${productTypes[i]}-palette .palette-color`).append($colorRadio).append($colorLabel);
+            $(`.${$anotherButton}-palette .palette-color`)
+                .append($colorRadio)
+                .append($colorLabel);
 
-            $('.color-circle').css('width', '20px').css('height', '20px').css('display', 'block').css('background', color);
+            //change the color of current label 
+            $(`.${$anotherButton}-palette label[for=${radioId}]`).css('background', color);
         })
 
     })
 }
 
-// step:6 add eventlistener to palette radio, to collect user's input of color
-// print to SVG
 
 
 // step:7 add eventlistener to confirm button, to collect user's choice of color
 
+
 $(function() {
     eventHandler.submitProductFilter();
-
-    // makeupApp.getColors('blush', '$'); // => ['#123', ...]
+    eventHandler.newPaletteGenerator();
 });
