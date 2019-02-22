@@ -258,3 +258,5 @@ header {
     justify-content: space-around; }
     .result .wrapper h1 {
       font-size: 2rem; }
+  .result button {
+    margin-top: 10%; }
