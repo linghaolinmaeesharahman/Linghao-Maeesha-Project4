@@ -1,6 +1,11 @@
 @import 'base/setup';
 @import 'base/global';
 @import 'components/face';
+@import 'components/form';
+@import 'components/buttons';
+@import 'components/palettes';
+@import 'layouts/header';
+@import 'layouts/result';
 .color-circle {
     width: 20px;
     height: 20px;

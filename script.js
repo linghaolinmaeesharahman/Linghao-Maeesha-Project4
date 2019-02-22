@@ -119,6 +119,18 @@ eventHandler.initPalette = function() {
 // step:6 add eventlistener to palette radio, to collect user's input of color
 // print to SVG
 
+getColor = function () {
+    $('.palette-color').on('click', 'input', function (event) {
+        event.preventDefault();
+        console.log('click');
+        //find the value of clicked radio hex code 
+
+        $('#lip').css('fill', $(this).val());
+    })
+}
+
+getColor();
+
 
 // step7: add eventlistener to 'give me another one' button
 eventHandler.newPaletteGenerator = function() {
@@ -154,25 +166,6 @@ eventHandler.newPaletteGenerator = function() {
 
     })
 }
-
-
-
-// take out radio name and value 
-// take out value of product type and color 
-// print onto face
-
-// })
-
-getColor = function() {
-    $('.palette-color').on('click', 'input', function () {
-        console.log('click');
-        //find the value of clicked radio hex code 
-
-        $('#lip').css('fill', $(this).val());
-    }) 
-}
-
-getColor();
 
 // step:9 add eventlistener to confirm button, to collect user's choice of color
 

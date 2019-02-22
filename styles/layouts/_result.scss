@@ -1,0 +1,13 @@
+.result {
+    background-color: $black-color;
+    color: $pink-color;
+    
+    .wrapper {
+        display: flex;
+        text-align: center;
+
+        h1 {
+            font-size: 2rem;
+        }
+    }
+}

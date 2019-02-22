@@ -1,1 +1,36 @@
+// font-family: 'Dancing Script', cursive;
+// font-family: 'Josefin Sans', sans-serif;
 
+// variables
+$pink-color: #f0e4e4;
+$black-color: #3a3a3a;
+$white-color: #fff;
+
+.wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+// mixins 
+
+@mixin primary-font($size) {
+    font-size: $size;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+}
+
+@mixin heading-font($size) {
+    font-size: $size;
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+}
+
+body {
+    @include primary-font(1rem);
+    line-height: 1.6;
+}
+
+h1 {
+    @include heading-font(5rem);
+    text-transform: capitalize;
+}

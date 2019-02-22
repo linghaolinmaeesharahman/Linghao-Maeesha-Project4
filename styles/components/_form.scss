@@ -1,0 +1,25 @@
+.user-choice {
+    text-align: center;
+    background-color: $black-color;
+    color: $pink-color;
+    padding: 100px 0;
+    fieldset {
+        border: none;
+    }
+
+    .product-type {
+        label:not(:last-of-type) {
+            padding-right: 30px;
+        }
+    }
+
+    .price-sign {
+        label:not(:first-of-type) {
+            padding-left: 30px;
+        }
+    }
+
+    .button-container {
+        margin-top: 5%;
+    }
+}
