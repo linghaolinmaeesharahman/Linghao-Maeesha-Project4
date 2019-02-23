@@ -75,7 +75,6 @@ makeupApp.getProducts = function(type, price) {
 makeupApp.getColors = function(type, price) {
     return makeupApp.getProducts(type, price)
         .then(products => {
-            // console.log(products);
 
             let colorHolderType = colorHolder[`${type}`];
             colorHolderType.length = 0;
@@ -126,21 +125,25 @@ eventHandler.submitProductFilter = function() {
 
                     colorPalette.map((color) => {
                         //give each radio an id, so they can attach to each label
-                        let radioId = "radio-" + productTypes[i] + colorPalette.indexOf(color);
+                        let $radioId = "radio-" + productTypes[i] + colorPalette.indexOf(color);
                         //append radio button into palette
-                        let $colorRadio = `<input type="radio" id=${radioId} name=${productTypes[i]} value= ${color}>`;
+                        let $colorRadio = `<input type="radio" id=${$radioId} name=${productTypes[i]} value= ${color}>`;
 
                         //append label into palette
-                        let $colorLabel = `<label for=${radioId} class='color-circle'></label>`;
+                        let $colorLabel = `<label for=${$radioId} class='color-circle'></label>`;
 
                         $(`.${productTypes[i]}-palette .palette-color`)
                             .append($colorRadio)
                             .append($colorLabel);
 
                         //change the label to each hex color
-                        $(`.${productTypes[i]}-palette label[for=${radioId}]`)
+                        $(`.${productTypes[i]}-palette label[for=${$radioId}]`)
                             .css('background', color);
                     })
+                })
+                .fail((error) => {
+                    console.log(error);
+                    alert('Sorry, please refresh your browser and try again');
                 });
         };
     })
@@ -205,20 +208,20 @@ eventHandler.newPaletteGenerator = function() {
 
         colorPalette.map((color) => {
             //give each radio an id, so they can attach to each label
-            let radioId = "radio-" + $anotherButton + colorPalette.indexOf(color);
+            let $radioId = "radio-" + $anotherButton + colorPalette.indexOf(color);
 
             //append radio button into palette
-            let $colorRadio = `<input type="radio" name=${$anotherButton} id=${radioId} value= ${color}>`;
+            let $colorRadio = `<input type="radio" name=${$anotherButton} id=${$radioId} value= ${color}>`;
 
             //append label into palette
-            let $colorLabel = `<label for=${radioId} class='color-circle'></label>`;
+            let $colorLabel = `<label for=${$radioId} class='color-circle'></label>`;
 
             $(`.${$anotherButton}-palette .palette-color`)
                 .append($colorRadio)
                 .append($colorLabel);
 
             //change the color of current label 
-            $(`.${$anotherButton}-palette label[for=${radioId}]`).css('background', color);
+            $(`.${$anotherButton}-palette label[for=${$radioId}]`).css('background', color);
         })
 
     })
@@ -261,9 +264,13 @@ eventHandler.confirmProduct = function() {
             //call api
             makeupApp.getProductsByColor(productTypes[i], $productPrice, userColor)
                 .then(products => {
+                    // empty the array to wait for new call
+                    productHolder[productTypes[i]].length = 0;
+
                     for (let j = 0; j < products.length; j++) {
                         productHolder[productTypes[i]].push(products[j]);
 
+                        console.log(productHolder[productTypes[i]]);
                         //random generate 1 product
                         for (let productType in productHolder) {
                             if (productHolder[productType].length != 0) {
@@ -290,6 +297,10 @@ eventHandler.confirmProduct = function() {
                             }
                         }
                     }
+                })
+                .fail((error) => {
+                    console.log(error);
+                    alert('Sorry, please refresh your browser and try again');
                 });
         }
     })
