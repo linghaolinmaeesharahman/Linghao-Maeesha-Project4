@@ -34,6 +34,14 @@ let colorHolder = {
     lipstick: []
 };
 
+//store product in local
+let productHolder = {
+    blush: [],
+    eyeshadow: [],
+    eyebrow: [],
+    lipstick: []
+};
+
 // step2: build api call so they can be called in event listener
 
 makeupApp.url = 'https://makeup-api.herokuapp.com/api/v1/products.json'
@@ -66,7 +74,7 @@ makeupApp.getProducts = function(type, price) {
 makeupApp.getColors = function(type, price) {
     return makeupApp.getProducts(type, price)
         .then(products => {
-            console.log(products);
+            // console.log(products);
 
             let colorHolderType = colorHolder[`${type}`];
             colorHolderType.length = 0;
@@ -82,8 +90,10 @@ makeupApp.getProductsByColor = function(type, price, color) {
     return makeupApp.getProducts(type, price)
         .then(products => {
             return products.filter(product => {
-                product.product_colors.includes(color);
-                console.log(product);
+                return product.product_colors.some((item) => {
+                    return item.hex_value === color;
+                })
+
             });
         });
 }
@@ -129,13 +139,6 @@ eventHandler.submitProductFilter = function() {
                         //change the label to each hex color
                         $(`.${productTypes[i]}-palette label[for=${radioId}]`)
                             .css('background', color);
-
-                        // hide radio buttons
-                        $('input:radio').addClass('input-hidden');
-                        // add border on label when it is checked
-                        $('label').click(function() {
-                            $(this).addClass('selected').siblings().removeClass('selected');
-                        });
                     })
                 });
         };
@@ -150,29 +153,18 @@ eventHandler.initPalette = function() {
 // step:6 add eventlistener to palette radio, to collect user's input of color
 // print to SVG
 
-// take out radio name and value 
-// take out value of product type and color 
-// print onto face
-
-// take out radio name and value 
-// take out value of product type and color 
-// print onto face
-
-getColor = function() {
+eventHandler.printColorToFace = function() {
     $('.palette-color').on('click', 'input', function() {
-        console.log('click');
         //find the value of clicked radio hex code 
-
-        // $('.palette input[type="radio"]').css('display', 'none');
 
         let inputColor = $(this).val();
 
         let inputType = $(this).attr("name");
 
-        let inputTypeBlush = $('input[name="blush"]:checked').val();
-        let inputTypeEyebrow = $('input[name="eyebrow"]:checked').val();
-        let inputTypeEyeshadow = $('input[name="eyeshadow"]:checked').val();
-        let inputTypeLipstick = $('input[name="lipstick"]:checked').val();
+        // let inputTypeBlush = $('input[name="blush"]:checked').val();
+        // let inputTypeEyebrow = $('input[name="eyebrow"]:checked').val();
+        // let inputTypeEyeshadow = $('input[name="eyeshadow"]:checked').val();
+        // let inputTypeLipstick = $('input[name="lipstick"]:checked').val();
 
 
         if (inputType === 'blush') {
@@ -184,31 +176,30 @@ getColor = function() {
         }
 
         if (inputType === 'lipstick') {
-            $('#lip .st0').css('fill', inputColor);
+            $('#lip').css('fill', inputColor);
         }
 
         if (inputType === 'eyeshadow') {
             $('.st3').css('fill', inputColor);
         }
-
-        // // hide radio buttons
-        // $('input:radio').addClass('input-hidden');
-        // // add border on label when it is checked
-        // $('label').click(function () {
-        //     $(this).addClass('selected').siblings().removeClass('selected');
-        // }); 
-
-        // $('.palette input[type="radio"]').css('display', 'none');
     })
 }
 
-getColor();
+// add event listener to clear face button to clear the color
+eventHandler.clearColor = function() {
+    $('button[type="reset"]').on('click', function(event) {
+        event.preventDefault();
+        console.log('reset');
 
+        $('path').css('fill', 'none');
+        $('.st2').css('fill', 'none');
+    })
+}
 
 // step7: add eventlistener to 'give me another one' button
 eventHandler.newPaletteGenerator = function() {
-    $('button[name="palette"]').on('click', function(event) {
-        event.preventDefault();
+    $('button[name="palette"]').on('click', function() {
+        // event.preventDefault();
         //find the value of clicked button
         let $anotherButton = $(this).val();
 
@@ -232,12 +223,8 @@ eventHandler.newPaletteGenerator = function() {
                 .append($colorRadio)
                 .append($colorLabel);
 
-            // $('.palette input[type="radio"]').css('display', 'none');
-
             //change the color of current label 
-            $(`.${$anotherButton}-palette label[for=${radioId}]`).css('background', color)
-
-
+            $(`.${$anotherButton}-palette label[for=${radioId}]`).css('background', color);
         })
 
     })
@@ -245,35 +232,98 @@ eventHandler.newPaletteGenerator = function() {
 
 // step:8 add eventlistener to confirm button, to collect user's choice of color
 eventHandler.confirmProduct = function() {
-        $('button[name = "confirm-button"]').on('click', function(event) {
-                    event.preventDefault();
+    $('button[name = "confirm-button"]').on('click', function() {
 
-                    //take the user's choice of colors
-                    let $userBlush = $('.blush-palette input[type = "radio"]:checked').val();
-                    let $userEyebrow = $('.eyebrow-palette input[type = "radio"]:checked').val();
-                    let $userEyeshadow = $('.eyeshadow-palette input[type = "radio"]:checked').val();
-                    let $userLipstick = $('.lipstick-palette input[type = "radio"]:checked').val();
-                    console.log($userBlush, $userEyebrow, $userEyeshadow, $userLipstick);
+        //take the user's choice of colors
+        let $userBlush = $('.blush-palette input[type = "radio"]:checked').val();
+        let $userEyebrow = $('.eyebrow-palette input[type = "radio"]:checked').val();
+        let $userEyeshadow = $('.eyeshadow-palette input[type = "radio"]:checked').val();
+        let $userLipstick = $('.lipstick-palette input[type = "radio"]:checked').val();
 
-                    // step:9 add eventlistener to confirm button, to collect user's choice of color
+        //take the clicked radio's name
+        // let $currentName = $('.palette-color input[type = "radio"]:checked').attr('name');
+        // console.log($currentName);
 
-                    // step :10 add eventlistener to reset button to clear the colours
-                    // callback function
+        //take the user's choice of types
+        let $checkBoxInputs = $('input[name = product-type]:checked');
+        let productTypes = $checkBoxInputs.map(number => $checkBoxInputs[number].value);
 
-                    clearColor = function() {
-                        $('button[type="reset"]').on('click', function(event) {
-                            event.preventDefault();
-                            console.log('reset');
+        //take the user's choice of price
+        let $productPrice = $('input[name = product-price]:checked').val();
 
-                            $('path').css('fill', 'none');
-                            $('.st2').css('fill', 'none');
-                        })
+
+        //?check if the val() is valid
+
+        //loop through types that have been selected, 
+        for (let i = 0; i < productTypes.length; i++) {
+            //takethe user's choice of color, under each type
+            let userColor;
+
+            if (productTypes[i] === 'blush') {
+                userColor = $userBlush;
+            } else if (productTypes[i] === 'eyebrow') {
+                userColor = $userEyebrow;
+            } else if (productTypes[i] === 'eyeshadow') {
+                userColor = $userBlush;
+            } else if (productTypes[i] === 'lipstick') {
+                userColor = $userLipstick;
+            } else {
+                alert('Please choose a color!');
+            };
+
+            //call api
+            makeupApp.getProductsByColor(productTypes[i], $productPrice, userColor)
+                .then(products => {
+                    for (let j = 0; j < products.length; j++) {
+                        productHolder[productTypes[i]].push(products[j]);
+
+                        //random generate 1 product
+                        for (let productType in productHolder) {
+                            if (productHolder[productType].length != 0) {
+
+                                let randomNum = Math.floor(Math.random() * productHolder[productType].length);
+                                let generatedProduct = productHolder[productType][randomNum];
+                                console.log(productType);
+                                console.log('generated');
+
+                                // console.log(generatedProduct.brand);
+
+                                //print the result on page
+
+                                let $brand = generatedProduct.brand;
+                                let $name = generatedProduct.name;
+                                let $price = generatedProduct.price;
+                                let $currency = generatedProduct.currency;
+                                let $imgUrl = generatedProduct.image_link;
+                                let $link = generatedProduct.product_link;
+
+                                $(`.${productType}-result .brand-name`).text($brand);
+                                $(`.${productType}-result .product-name`)
+                                    .text($name)
+                                    .attr('href', $link);
+                                $(`.${productType}-result img`).attr('src', $imgUrl);
+                                $(`.${productType}-result .product-price`).text($price);
+                                $(`.${productType}-result .product-price span`).text($currency);
+
+                            }
+                        }
                     }
 
-                    clearColor();
+                });
 
-                    $(function() {
-                        eventHandler.submitProductFilter();
-                        eventHandler.newPaletteGenerator();
-                        eventHandler.confirmProduct();
-                    });
+            console.log(productHolder);
+        }
+    })
+}
+
+
+
+// step:9 add eventlistener to confirm button, to collect user's choice of color
+
+$(function() {
+    eventHandler.submitProductFilter();
+    eventHandler.newPaletteGenerator();
+    eventHandler.printColorToFace();
+    eventHandler.clearColor();
+    eventHandler.confirmProduct();
+});
