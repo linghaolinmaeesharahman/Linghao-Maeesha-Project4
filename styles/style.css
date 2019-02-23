@@ -350,5 +350,5 @@ header {
     -ms-flex-pack: center;
     justify-content: center;
     color: #f0e4e4; }
-    .result .product-name:visited {
-      color: hotpink; }
+    .result .product-name:visited, .result .product-name:focus, .result .product-name:hover {
+      color: #e75a70; }

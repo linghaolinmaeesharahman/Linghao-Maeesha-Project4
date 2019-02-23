@@ -61,8 +61,10 @@
         // overflow: hidden;
         // text-overflow: ellipsis;
         // max-width: 220px;
-        &:visited {
-            color: hotpink;
+        &:visited,
+        &:focus,
+        &:hover {
+            color: #e75a70;
         }
     }
 }
