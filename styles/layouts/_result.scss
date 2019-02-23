@@ -5,11 +5,17 @@
     .wrapper {
         display: flex;
         text-align: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        // width: 25%;
+        // margin-right: 2%; 
+        // justify-content: center;
+        // justify-content: space-around;
         h1 {
             font-size: 2rem;
         }
         section {
-            width: 25%;
+            width: calc(100% / 4);
         }
     }
     img {

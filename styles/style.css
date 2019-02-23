@@ -428,6 +428,11 @@ header span {
   display: -ms-flexbox;
   display: flex;
   text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .result .wrapper h1 {
@@ -435,7 +440,7 @@ header span {
 }
 
 .result .wrapper section {
-  width: 25%;
+  width: calc(100% / 4);
 }
 
 .result img {
