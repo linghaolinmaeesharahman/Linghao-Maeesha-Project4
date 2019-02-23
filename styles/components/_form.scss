@@ -30,6 +30,20 @@
     input[type="submit"] {
         background-color: $black-color;
         color: $pink-color;
+
+        &:focus {
+            background-color: darken($pink-color, 10%);
+            color: $black-color;
+            outline: 2px solid $black-color;
+        }
+
+        &:hover {
+            outline: 2px solid $black-color;
+        }
+    }
+
+    input[type="checkbox"]:checked + label {
+        font-weight: 700;
     }
 
     label {

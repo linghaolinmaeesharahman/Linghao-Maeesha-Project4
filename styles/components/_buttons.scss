@@ -4,6 +4,17 @@ input[type="submit"] {
     border: none;
     padding: 15px 30px;
     color: $black-color;
+    transition: all 0.5s;
+
+    &:focus {
+        background-color: darken($pink-color, 10%);
+        color: $black-color;
+    }
+
+    &:hover {
+        background-color: darken($pink-color, 10%);
+        color: $black-color;
+    }
 }
 
 .reset-button {

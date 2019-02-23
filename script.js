@@ -337,3 +337,17 @@ $(function() {
     eventHandler.confirmProduct();
     eventHandler.newProductGenerator();
 });
+
+// scroll functions
+
+$('.submit-btn').click(function () {
+    $('html, body').animate({
+        scrollTop: $('.palette').offset().top
+    }, 1000);
+});
+
+$('.confirm-btn').click(function () {
+    $('html, body').animate({
+        scrollTop: $('.result').offset().top
+    }, 1000);
+});

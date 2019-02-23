@@ -15,4 +15,22 @@
     button {
         margin-top: 10%;
     }
+
+    img {
+        width: 50%;
+        height: 25%;
+        max-height: 25%;
+        object-fit: cover;
+        margin: auto;
+    }
+
+    .brand-name {
+        text-transform: capitalize;
+        font-size: 1.2rem;
+    }
+
+    .product-name {
+        font-size: 0.8rem;
+        width: 100%;
+    }
 }

@@ -139,9 +139,6 @@ img {
   display: block;
   width: 100%; }
 
-input:focus {
-  border: 2px solid black; }
-
 .wrapper {
   max-width: 1280px;
   margin: 0 auto; }
@@ -206,6 +203,14 @@ h1 {
   .user-choice input[type="submit"] {
     background-color: #3a3a3a;
     color: #f0e4e4; }
+    .user-choice input[type="submit"]:focus {
+      background-color: #dec3c3;
+      color: #3a3a3a;
+      outline: 2px solid #3a3a3a; }
+    .user-choice input[type="submit"]:hover {
+      outline: 2px solid #3a3a3a; }
+  .user-choice input[type="checkbox"]:checked + label {
+    font-weight: 700; }
   .user-choice label {
     position: relative; }
   .user-choice input[type="checkbox"] {
@@ -236,7 +241,18 @@ input[type="submit"] {
   background-color: #f0e4e4;
   border: none;
   padding: 15px 30px;
-  color: #3a3a3a; }
+  color: #3a3a3a;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s; }
+  button:focus,
+  input[type="submit"]:focus {
+    background-color: #dec3c3;
+    color: #3a3a3a; }
+  button:hover,
+  input[type="submit"]:hover {
+    background-color: #dec3c3;
+    color: #3a3a3a; }
 
 .reset-button {
   margin-bottom: 2%; }
@@ -308,3 +324,16 @@ header {
       font-size: 2rem; }
   .result button {
     margin-top: 10%; }
+  .result img {
+    width: 50%;
+    height: 25%;
+    max-height: 25%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    margin: auto; }
+  .result .brand-name {
+    text-transform: capitalize;
+    font-size: 1.2rem; }
+  .result .product-name {
+    font-size: 0.8rem;
+    width: 100%; }
