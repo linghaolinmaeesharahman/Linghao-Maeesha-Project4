@@ -28,9 +28,10 @@ $white-color: #fff;
 body {
     @include primary-font(1rem);
     line-height: 1.6;
+    color: $black-color;
 }
 
 h1 {
-    @include heading-font(5rem);
+    @include heading-font(4.5rem);
     text-transform: capitalize;
 }
