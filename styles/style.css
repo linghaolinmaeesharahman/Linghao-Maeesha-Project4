@@ -328,8 +328,8 @@ header {
     width: 50%;
     height: 25%;
     max-height: 25%;
-    -o-object-fit: cover;
-    object-fit: cover;
+    -o-object-fit: contain;
+    object-fit: contain;
     margin: auto; }
   .result .brand-name {
     text-transform: capitalize;
