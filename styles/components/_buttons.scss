@@ -9,6 +9,7 @@ input[type="submit"] {
     &:focus {
         background-color: darken($pink-color, 10%);
         color: $black-color;
+        outline: 2px solid $black-color;
     }
 
     &:hover {
