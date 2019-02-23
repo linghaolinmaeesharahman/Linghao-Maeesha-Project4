@@ -1,6 +1,7 @@
 .result {
     background-color: $black-color;
     color: $pink-color;
+    padding: 50px 0;
     
     .wrapper {
         display: flex;
@@ -17,9 +18,11 @@
     }
 
     img {
-        width: 50%;
-        height: 25%;
-        max-height: 25%;
+        // width: 50%;
+        // height: 25%;
+        // max-height: 25%;
+        width: 150px;
+        height: 150px;;
         object-fit: contain;
         margin: auto;
     }
