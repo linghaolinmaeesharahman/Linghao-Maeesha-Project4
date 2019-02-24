@@ -17,6 +17,10 @@
         label:not(:first-of-type) {
             padding-left: 30px;
         }
+
+        input[type="radio"]:focus {
+            outline: 2px solid #e75a70;
+        }
     }
 
     .button-container {
@@ -49,11 +53,16 @@
         position: relative;
     }
 
+    input[type="checkbox"]:focus + label::before {
+        border: 2px solid #e75a70;
+    }
+
     input[type="checkbox"] {
         opacity: 0;
 
         + label::before,
         + label::after {
+            content: '';
             position: absolute;
         }
 
@@ -71,14 +80,14 @@
 
         + label::after {
             content: '';
-            // display: inline-block;
+            display: inline-block;
             height: 20px;
             width: 20px;
             
             left: -30px;
             top: -2px;
 
-            content: none;
+            // content: none;
         }
 
         &:checked + label::after {
@@ -92,12 +101,35 @@
 @media (max-width: 560px) {
     .user-choice {
         .product-type {
+        label:not(:last-of-type) {
+            padding-right: 0px;
+        }
+    }
+
+    .price-sign {
+        label:not(:first-of-type) {
+            padding-left: 0px;
+        }
+
+        input[type="radio"]:focus {
+            outline: 2px solid #e75a70;
+        }
+    }
+        .product-type {
             justify-content: center;
+            align-items: flex-start;
+            text-align: left;
             label {
                 padding: 0;
+                display: inline-block;
+                width: 100px;
+                text-align: left;
+                margin-left: 50%;
+                margin-right: 50%;
             }
             display: flex;
             flex-wrap: wrap;
+            align-items: flex-start;
             // input {
             //     // width: (100% / 4);
             // }
@@ -107,6 +139,44 @@
                 padding: 0;
             }
         }
+
+        input[type="checkbox"] {
+        opacity: 0;
+
+        + label::before,
+        + label::after {
+            content: '';
+            position: absolute;
+        }
+
+        + label::before{
+            content: '';
+            display: inline-block;
+            top: -3px;
+            right: 150px;
+            
+            height: 20px;
+            width: 20px;
+            
+            border: 1px solid black;   
+        }
+
+        + label::after {
+            content: '';
+            display: inline-block;
+            height: 20px;
+            width: 20px;
+            
+            right: 150px;
+            top: -2px;
+
+            // content: none;
+        }
+
+        &:checked + label::after {
+            content: url(../assets/lips.svg);
+        }
+    }
     }
 }
 

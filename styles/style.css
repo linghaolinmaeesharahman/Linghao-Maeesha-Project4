@@ -214,6 +214,8 @@ h1 {
     padding-right: 35px; }
   .user-choice .price-sign label:not(:first-of-type) {
     padding-left: 30px; }
+  .user-choice .price-sign input[type="radio"]:focus {
+    outline: 2px solid #e75a70; }
   .user-choice .button-container {
     margin-top: 5%; }
   .user-choice .checked {
@@ -230,10 +232,13 @@ h1 {
     font-weight: 700; }
   .user-choice label {
     position: relative; }
+  .user-choice input[type="checkbox"]:focus + label::before {
+    border: 2px solid #e75a70; }
   .user-choice input[type="checkbox"] {
     opacity: 0; }
     .user-choice input[type="checkbox"] + label::before,
     .user-choice input[type="checkbox"] + label::after {
+      content: '';
       position: absolute; }
     .user-choice input[type="checkbox"] + label::before {
       content: '';
@@ -245,28 +250,67 @@ h1 {
       border: 1px solid black; }
     .user-choice input[type="checkbox"] + label::after {
       content: '';
+      display: inline-block;
       height: 20px;
       width: 20px;
       left: -30px;
-      top: -2px;
-      content: none; }
+      top: -2px; }
     .user-choice input[type="checkbox"]:checked + label::after {
       content: url(../assets/lips.svg); }
 
 @media (max-width: 560px) {
+  .user-choice .product-type label:not(:last-of-type) {
+    padding-right: 0px; }
+  .user-choice .price-sign label:not(:first-of-type) {
+    padding-left: 0px; }
+  .user-choice .price-sign input[type="radio"]:focus {
+    outline: 2px solid #e75a70; }
   .user-choice .product-type {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    text-align: left;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    align-items: flex-start; }
     .user-choice .product-type label {
-      padding: 0; }
+      padding: 0;
+      display: inline-block;
+      width: 100px;
+      text-align: left;
+      margin-left: 50%;
+      margin-right: 50%; }
   .user-choice .price-sign label {
-    padding: 0; } }
+    padding: 0; }
+  .user-choice input[type="checkbox"] {
+    opacity: 0; }
+    .user-choice input[type="checkbox"] + label::before,
+    .user-choice input[type="checkbox"] + label::after {
+      content: '';
+      position: absolute; }
+    .user-choice input[type="checkbox"] + label::before {
+      content: '';
+      display: inline-block;
+      top: -3px;
+      right: 150px;
+      height: 20px;
+      width: 20px;
+      border: 1px solid black; }
+    .user-choice input[type="checkbox"] + label::after {
+      content: '';
+      display: inline-block;
+      height: 20px;
+      width: 20px;
+      right: 150px;
+      top: -2px; }
+    .user-choice input[type="checkbox"]:checked + label::after {
+      content: url(../assets/lips.svg); } }
 
 @media (max-width: 530px) {
   .user-choice .product-type {
