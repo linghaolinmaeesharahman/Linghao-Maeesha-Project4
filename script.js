@@ -75,14 +75,15 @@ makeupApp.getProducts = function(type, price) {
 makeupApp.getColors = function(type, price) {
     return makeupApp.getProducts(type, price)
         .then(products => {
-
-            let colorHolderType = colorHolder[`${type}`];
-            colorHolderType.length = 0;
+            let colors = [];
             for (let i in products) {
                 let colorCollection = products[i].product_colors;
-                colorCollection.map((color) => colorHolderType.push(color["hex_value"]));
+                colorCollection.map((color) => {
+                    colors.push(color["hex_value"].split(','));
+                });
             }
-            return colorHolderType;
+
+            return colors.flat();
         });
 }
 
@@ -118,32 +119,38 @@ eventHandler.submitProductFilter = function() {
             makeupApp.getColors(productTypes[i], $productPrice)
                 //resolve the promise, get all the hex colors
                 .then((colors) => {
-                    // randomize the color
-                    let colorPalette = dataProcessor.colorGenerator(colors);
+                    colorHolder[`${productTypes[i]}`] = colors;
+                    //give alert if user didn't choose anything.
+                    if (colors.length != 0) {
+                        // randomize the color
+                        let colorPalette = dataProcessor.colorGenerator(colors);
 
-                    //print the color on page
+                        //print the color on page
 
-                    colorPalette.map((color) => {
-                        //give each radio an id, so they can attach to each label
-                        let $radioId = "radio-" + productTypes[i] + colorPalette.indexOf(color);
-                        //append radio button into palette
-                        let $colorRadio = `<input type="radio" id=${$radioId} name=${productTypes[i]} value= ${color}>`;
+                        colorPalette.map((color) => {
+                            //give each radio an id, so they can attach to each label
+                            let $radioId = "radio-" + productTypes[i] + colorPalette.indexOf(color);
+                            //append radio button into palette
+                            let $colorRadio = `<input type="radio" id=${$radioId} name=${productTypes[i]} value= ${color}>`;
 
-                        //append label into palette
-                        let $colorLabel = `<label for=${$radioId} class='color-circle'></label>`;
+                            //append label into palette
+                            let $colorLabel = `<label for=${$radioId} class='color-circle'></label>`;
 
-                        $(`.${productTypes[i]}-palette .palette-color`)
-                            .append($colorRadio)
-                            .append($colorLabel);
+                            $(`.${productTypes[i]}-palette .palette-color`)
+                                .append($colorRadio)
+                                .append($colorLabel);
 
-                        //change the label to each hex color
-                        $(`.${productTypes[i]}-palette label[for=${$radioId}]`)
-                            .css('background', color);
-                    })
+                            //change the label to each hex color
+                            $(`.${productTypes[i]}-palette label[for=${$radioId}]`)
+                                .css('background', color);
+                        })
+                    } else {
+                        swal('Please choose at least one product!');
+                    }
                 })
                 .fail((error) => {
                     console.log(error);
-                    alert('Sorry, please refresh your browser and try again');
+                    swal('Sorry, please refresh your browser and try again');
                 });
         };
     })
@@ -162,7 +169,6 @@ eventHandler.printColorToFace = function() {
         //find the value of clicked radio hex code 
 
         let inputColor = $(this).val();
-
         let inputType = $(this).attr("name");
 
         if (inputType === 'blush') {
@@ -257,8 +263,6 @@ eventHandler.confirmProduct = function() {
                 userColor = $userEyeshadow;
             } else if (productTypes[i] === 'lipstick') {
                 userColor = $userLipstick;
-            } else {
-                alert('Please choose a color!');
             };
 
             //call api
@@ -269,11 +273,9 @@ eventHandler.confirmProduct = function() {
 
                     for (let j = 0; j < products.length; j++) {
                         productHolder[productTypes[i]].push(products[j]);
-
-                        console.log(productHolder[productTypes[i]]);
                         //random generate 1 product
                         for (let productType in productHolder) {
-                            if (productHolder[productType].length != 0) {
+                            if (productHolder[productType].length > 0) {
 
                                 let generatedProduct = dataProcessor.productGenerator(productHolder[productType]);
 
@@ -300,7 +302,7 @@ eventHandler.confirmProduct = function() {
                 })
                 .fail((error) => {
                     console.log(error);
-                    alert('Sorry, please refresh your browser and try again');
+                    swal('Sorry, please refresh your browser and try again');
                 });
         }
     })
@@ -314,8 +316,10 @@ eventHandler.newProductGenerator = function() {
         let productArray = productHolder[$currentType];
         let generatedProduct = dataProcessor.productGenerator(productArray);
 
-        if (productArray.length < 2) {
-            alert('Sorry, this is the only product that holds this color.');
+        if (productArray.length === 1) {
+            swal("Sorry, this is the only product that holds this color.");
+        } else if (productArray.length === 0) {
+            swal("Please choose at least one product/color.");
         }
 
         let $brand = generatedProduct.brand;
@@ -351,13 +355,13 @@ $(function() {
 
 // scroll functions
 
-$('.submit-btn').click(function () {
+$('.submit-btn').click(function() {
     $('html, body').animate({
         scrollTop: $('.palette').offset().top
     }, 1000);
 });
 
-$('.confirm-btn').click(function () {
+$('.confirm-btn').click(function() {
     $('html, body').animate({
         scrollTop: $('.result').offset().top
     }, 1000);
