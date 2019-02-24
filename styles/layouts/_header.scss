@@ -25,3 +25,54 @@ header {
         font-size: 2rem;
     }
 }
+
+// media queries
+
+@media (max-width: 620px) {
+    header {
+        h1 {
+            @include heading-font(3rem);
+        }
+
+        span {
+            font-size: 1.5rem;
+        }
+    }  
+}
+
+@media (max-width: 500px) {
+    header {
+        h1 {
+            @include heading-font(2.5rem);
+        }
+
+        span {
+            font-size: 1.2rem;
+        }
+    }  
+}
+
+@media (max-width: 400px) {
+    header {
+        h1 {
+            @include heading-font(2rem);
+            border: 10px solid $pink-color;
+        }
+
+        span {
+            font-size: 1rem;
+        }
+    }  
+}
+
+@media (max-width: 350px) {
+    header {
+        h1 {
+            @include heading-font(1.5rem);
+        }
+
+        span {
+            font-size: 1rem;
+        }
+    }  
+}
