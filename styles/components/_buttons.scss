@@ -21,3 +21,23 @@ input[type="submit"] {
 .reset-button {
     margin-bottom: 2%;
 }
+
+// media queries 
+
+@media (max-width: 480px) {
+    .face {
+        button {
+            font-size: 0.9rem;
+            padding: 10px 10px;
+        }
+    }
+}
+
+@media (max-width: 370px) {
+    .face {
+        button {
+            font-size: 0.8rem;
+            padding: 5px 5px;
+        }
+    }
+}

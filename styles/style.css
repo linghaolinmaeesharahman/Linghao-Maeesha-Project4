@@ -185,6 +185,24 @@ h1 {
       fill: #fff;
       stroke: #000000; }
 
+@media (max-width: 950px) {
+  .face svg {
+    width: 30%;
+    padding: 50px 0px; } }
+
+@media (max-width: 950px) {
+  .face svg {
+    width: 35%; } }
+
+@media (max-width: 470px) {
+  .face svg {
+    width: 40%;
+    padding: 20px 0px; } }
+
+@media (max-width: 400px) {
+  .face svg {
+    width: 50%; } }
+
 .user-choice {
   text-align: center;
   background-color: #f0e4e4;
@@ -293,6 +311,16 @@ input[type="submit"] {
 .reset-button {
   margin-bottom: 2%; }
 
+@media (max-width: 480px) {
+  .face button {
+    font-size: 0.9rem;
+    padding: 10px 10px; } }
+
+@media (max-width: 370px) {
+  .face button {
+    font-size: 0.8rem;
+    padding: 5px 5px; } }
+
 .palette {
   padding-top: 100px; }
   .palette .wrapper {
@@ -341,8 +369,8 @@ input[type="submit"] {
     display: none; }
   .palette .wrapper button {
     font-size: 0.9rem;
-    margin-right: 1%;
-    margin-left: 1%; } }
+    margin-right: 2%;
+    margin-left: 2%; } }
 
 @media (max-width: 740px) {
   .palette .wrapper h3 {
@@ -352,6 +380,41 @@ input[type="submit"] {
     text-align: center; }
   .palette .wrapper button {
     padding: 10px 20px; } }
+
+@media (max-width: 650px) {
+  .palette .wrapper span {
+    display: none; }
+  .palette .wrapper button {
+    font-size: 0.8rem; } }
+
+@media (max-width: 520px) {
+  .palette .wrapper section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+  .palette .wrapper h3 {
+    font-size: 0.8rem;
+    margin: 0; } }
+
+@media (max-width: 440px) {
+  .palette .wrapper section {
+    width: 50%; }
+  .palette .wrapper h3 {
+    font-size: 0.9rem;
+    margin: 0; }
+  .palette .wrapper button {
+    font-size: 0.9rem;
+    padding: 10px 5px; }
+  .palette .wrapper .eyeshadow-palette h3,
+  .palette .wrapper .lipstick-palette h3 {
+    margin-top: 5%; } }
 
 header {
   background-image: url(../assets/background.jpg);
@@ -454,3 +517,49 @@ header {
     color: #f0e4e4; }
     .result .product-name:visited, .result .product-name:focus, .result .product-name:hover {
       color: #e75a70; }
+
+@media (max-width: 960px) {
+  .result button {
+    margin: 0 2%;
+    padding: 10px 10px; } }
+
+@media (max-width: 800px) {
+  .result .product-name {
+    font-size: 0.7rem;
+    height: 50px;
+    line-height: 1; }
+  .result .brand-name {
+    font-size: 1rem;
+    height: 50px; } }
+
+@media (max-width: 700px) {
+  .result button {
+    font-size: 0.9rem; }
+  .result .wrapper h1 {
+    font-size: 1.5rem;
+    line-height: 1; }
+  .result img {
+    width: 100px;
+    height: 100px; }
+  .result .product-price {
+    font-size: 0.9rem; } }
+
+@media (max-width: 505px) {
+  .result button {
+    font-size: 0.8rem;
+    padding: 5px 5px; }
+  .result .wrapper h1 {
+    font-size: 1rem; }
+  .result img {
+    width: 80px;
+    height: 80px; } }
+
+@media (max-width: 480px) {
+  .result .wrapper section {
+    width: calc(100% / 2); }
+  .result .brand-name {
+    font-size: 0.8rem;
+    height: 20px; }
+  .result .product-name {
+    font-size: 0.7rem;
+    line-height: 1.6; } }

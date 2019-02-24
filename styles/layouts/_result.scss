@@ -8,10 +8,6 @@
         text-align: center;
         justify-content: center;
         flex-wrap: wrap;
-        // width: 25%;
-        // margin-right: 2%; 
-        // justify-content: center;
-        // justify-content: space-around;
 
         h1 {
             font-size: 2rem;
@@ -24,9 +20,6 @@
     }
 
     img {
-        // width: 50%;
-        // height: 25%;
-        // max-height: 25%;
         width: 150px;
         height: 150px;;
         object-fit: contain;
@@ -38,10 +31,6 @@
         font-size: 1.2rem;
     }
 
-    // h4 {
-    //     display: inline-block;
-    // }
-
     .product-name {
         font-size: 0.8rem;
         width: 100%;
@@ -50,17 +39,6 @@
         flex-wrap: wrap;
         justify-content: center;
         color: $pink-color;
-        // white-space: nowrap;
-        // overflow: scroll;
-        // overflow: hidden;
-        // text-overflow: ellipsis;
-        // display: -webkit-box;
-        // -webkit-box-orient: vertical;
-        // -webkit-line-clamp: 1; /* number of lines to show */
-        // white-space: nowrap;
-        // overflow: hidden;
-        // text-overflow: ellipsis;
-        // max-width: 220px;
         &:visited,
         &:focus,
         &:hover {
@@ -69,8 +47,90 @@
     }
 }
 
-// @media (max-width: 950px) {
-//     .result {
+// media queries
 
-//     }
-// }
+@media (max-width: 960px) {
+    .result {
+        button {
+            margin: 0 2%;
+            padding: 10px 10px;
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .result {
+        .product-name {
+            font-size: 0.7rem;
+            height: 50px;
+            line-height: 1;
+        }
+
+        .brand-name {
+            font-size: 1rem;
+            height: 50px;
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .result {
+        button {
+            font-size: 0.9rem;
+        }
+        .wrapper {
+            h1 {
+                font-size: 1.5rem;
+                line-height: 1;
+            }
+        }
+
+        img {
+            width: 100px;
+            height: 100px;;
+        }
+
+        .product-price {
+            font-size: 0.9rem;
+        }
+    }
+}
+
+@media (max-width: 505px) {
+    .result {
+        button {
+            font-size: 0.8rem;
+            padding: 5px 5px;
+        }
+        .wrapper {
+            h1 {
+                font-size: 1rem;
+            }
+        }
+
+        img {
+            width: 80px;
+            height: 80px;;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .result {
+        .wrapper {
+            section {
+                width: calc(100% / 2);
+            }
+        }
+
+        .brand-name {
+            font-size: 0.8rem;
+            height: 20px;
+        }
+
+        .product-name {
+            font-size: 0.7rem;
+            line-height: 1.6;
+        }
+    }
+}
